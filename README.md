@@ -1,4 +1,4 @@
-# <%= title %> Format
+# TUHH Institute of Entrepreneurship quarto revealjs template
 
 ## Installing
 
