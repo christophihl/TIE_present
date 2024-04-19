@@ -1,0 +1,213 @@
+---
+# TITLE & AUTHOR
+title: "Present Your Aweseome Stuff"
+subtitle: "Create beautiful interactive slide decks with Reveal.js"
+author: "Your Name"
+institute: "Hamburg University of Technology"
+date: today
+date-format: "dddd, D. MMMM YYYY"
+# FORMAT OPTIONS
+format: 
+  tie_present-revealjs:
+    width: 1600
+    height: 900
+    footer: "Your Topic | TUHH Institute of Entrepreneurship"
+    slide-number: true
+---
+
+# Introduction & Motivation {data-stack-name="Intro"}
+
+```{r}
+#| include: false
+sysfonts::font_add_google("Poppins", "Poppins", regular.wt = 300)
+showtext::showtext_auto()
+source("_extensions/tie_present/setup-ggplot2-tie.R")
+```
+
+```{scss}
+#| echo: false
+div.callout-note {
+  border-left-color: #00C1D4 !important;
+}
+
+div.callout-note.callout-style-default .callout-title {
+  background-color: #005e73;
+  color: white;
+}
+
+.callout.callout-style-default {
+  border-left: solid #005e73 .3rem;
+  border-right: solid 1px #005e73;
+  border-top: solid 1px #005e73;
+  border-bottom: solid 1px #005e73;
+}
+
+```
+
+
+## Getting up
+
+::: {.nonincremental}
+-   Eat eggs
+-   Drink coffee
+:::
+
+## Motivation
+
+::: {.incremental}
+- Two famous quotes from ancient Greeks:
+  - "I would rather discover one causal law than be King of Persia." `(Democritus)` 
+  - "We do not have knowledge of a thing until we grasped its cause." `(Aristotle)`
+:::
+
+
+## Motivating Example
+
+| - **Reported by The New York Times in March 2019:**
+|       "When Google conducted a study recently to determine whether 
+|       the company was underpaying women and minority groups, it found 
+|       that men were paid less money than women for doing similar work."
+
+::: {.source}
+(Source: [https://www.nytimes.com/2019/03/04/technology/google-gender-pay-gap.html](https://www.nytimes.com/2019/03/04/technology/google-gender-pay-gap.html))
+:::
+
+
+
+# Theory & Hypotheses {data-stack-name="Theory"}
+
+## An Image
+
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*IgHTRb58L0KK89iqfJOj4Q.png){.r-stretch fig-align="center"}
+
+
+::: {.source}
+Source: [https://towardsdatascience.com](https://towardsdatascience.com/how-to-understand-the-world-of-causality-c698cdc9f27c) (2023).
+:::
+
+## Going to sleep
+
+A slide with columns
+
+:::: {.columns}
+
+::: {.column width="40%"}
+contents...
+:::
+
+::: {.column width="60%"}
+contents...
+:::
+
+::::
+
+
+## Hyptheses
+
+Some theory ...
+
+::: {.callout-note icon=false}
+
+## Hypothesis 1:
+
+If ist rains, the street is wet.
+
+:::
+
+
+
+
+# Data & Methods {data-stack-name="Methods"}
+
+## Some Maths
+
+- Using assumptions 4 and 2, we obtain the following simplification:
+  - $\mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] = \mathbb{E}[Y_i(1)|T_i=1] - \mathbb{E}[Y_i(0)|T_i=0] = \mathbb{E}[Y_i|T_i=1] - \mathbb{E}[Y_i|T_i=0]$
+- *ATE* is now ***identifiable*** in the sense that it can be computed from a **purely statistical quantity**.
+
+## Some More Maths
+
+Proof:
+
+\begin{align*}
+\tau = \mathbb{E}[\tau_i] &= \mathbb{E}[Y_i(1) - Y_i(0)] \\
+&= \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] \\
+& \text{(linearity of expectation)} \\
+&= \mathbb{E}_X [\mathbb{E}[Y_i(1) \mid X_i]] - \mathbb{E}_X [\mathbb{E}[Y_i(0) \mid X_i]] \\
+&\text{(law of iterated expectations)} \\
+&= \mathbb{E}_X [\mathbb{E}[Y_i(1) \mid T_i = 1, X_i]] - \mathbb{E}_X [\mathbb{E}[Y_i(0) \mid T_i = 0, X_i]] \\
+&\text{(unconfoundedness and positivity)} \\
+&= \mathbb{E}_X [\mathbb{E}[Y_i \mid T_i = 1, X_i]] - \mathbb{E}_X [\mathbb{E}[Y_i \mid T_i = 0, X_i]] \\
+&\text{(consistency)}
+\end{align*}
+
+
+## Example plot
+
+TIE ggplot theme
+
+```{r}
+library(ggplot2)
+
+diamonds |> 
+  ggplot(aes(x=clarity, y=carat, color=price)) +
+  geom_point(alpha=0.5, position="jitter")
+```
+
+## Example plot 2
+
+TIE ggplot theme
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+diamonds |> mutate(cut = as.factor(as.character(cut))) |>
+  group_by(clarity) |> summarise(carat = mean(carat)) |>
+  ggplot(aes(x=clarity, y=carat)) +
+  geom_point(aes(colour = carat), size = 3)
+```
+
+# Results {data-stack-name="Results"}
+
+## Really Interesting 
+
+::: {.panel-tabset}
+
+### **Main Results:**
+
+* some stuff
+
+### **Secondary Results:**
+
+* some more stuff
+
+:::
+
+
+## Example plot 3 {data-state="hide-menubar"}
+
+TIE ggplot theme
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+diamonds |> mutate(cut = as.factor(as.character(cut))) |>
+  group_by(cut) |> summarise(carat = mean(carat)) |>
+  ggplot(aes(x=cut, y=carat)) +
+  geom_col(aes(fill = cut), size = 3)
+```
+
+
+# Conclusion {data-stack-name="Conclusion"}
+
+## Breakfast
+
+-   Eat eggs
+-   Drink coffee
+
+
+
+
+{{< include _extensions/tie_present/about.qmd >}}
