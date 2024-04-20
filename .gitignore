@@ -1,7 +1,7 @@
 # Inout/Output files
 docs/
 *.html
-*.jpg
+/*.jpg
 *_files/
 
 # R files

@@ -21,7 +21,7 @@ format:
 #| include: false
 sysfonts::font_add_google("Poppins", "Poppins", regular.wt = 300)
 showtext::showtext_auto()
-source("_extensions/tie_present/setup-ggplot2-tie.R")
+source("_extensions/christophihl/tie_present/setup-ggplot2-tie.R")
 ```
 
 ```{scss}
@@ -210,4 +210,4 @@ diamonds |> mutate(cut = as.factor(as.character(cut))) |>
 
 
 
-{{< include _extensions/tie_present/about.qmd >}}
+{{< include _extensions/christophihl/tie_present/about.qmd >}}
